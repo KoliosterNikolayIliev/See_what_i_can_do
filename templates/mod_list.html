@@ -1,0 +1,18 @@
+{% extends 'site.html' %}
+{% block site_content %}
+    <h1 class='text-center'>MODS" </h1>
+    <div class="row">
+        {% for mod in mods %}
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ mod.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ mod.type }} {{ mod.name }}, Age: {{ mod.age }}</h5>
+                        <p class="card-text">{{ mod.description }}</p>
+                        <a href="{% url 'pet details or comment' mod.id %}" class="btn btn-primary">See details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock site_content%}

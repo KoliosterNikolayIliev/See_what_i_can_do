@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>See what I can do</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="https://www.favicon.cc/logo3d/807558.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href=/static/css/main.css>
+</head>
+<body>
+<nav class="navbar navbar-light " style="margin-top:0.3%;margin-bottom: 2%;background: lightgoldenrodyellow">
+    <div class="col-auto">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                   href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list pets' %}active{% endif %}"
+                   href="{% url 'list pets' %}">Pictures</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
+                   href="{% url 'list mods' %}">Models</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'create pet' %}active{% endif %}"
+                   href="{% url 'create pet' %}">Add art !</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-auto"></div>
+    <div class="col">
+        <ul class="nav">
+            {% if user.is_authenticated %}
+                <li class="nav-item ml-auto">
+
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
+                       href="{% url 'user_profile' user.id %}">
+                        <img class="rounded-circle mb-3" src="{% static './users.png' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Logout"
+                       href="{% url 'logout' %}">
+                        <img class="rounded-circle mb-3" src="{% static './logout.webp' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+
+                </li>
+            {% else %}
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Login"
+                       href="{% url 'login' %}">
+                        <img class="rounded-circle mb-3" src="{% static './login.jpg' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Sign up"
+                       href="{% url 'signup_user' %}">
+                        <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container" style="width: auto">
+    {% block site_content %}
+    {% endblock site_content %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

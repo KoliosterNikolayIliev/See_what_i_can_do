@@ -1,0 +1,29 @@
+{% extends 'shared/../site.html' %}
+
+{% block site_content %}
+    <div class="container">
+        <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
+              action="{% url 'login' %}">
+            <h2>Sign In</h2>
+            {% csrf_token %}
+            <div>
+                <div>
+                <label>Username:</label>
+                </div>
+                {{ form.username }}
+            </div>
+            <div>
+                <div>
+                <label>Password:</label>
+                </div>
+                {{ form.password }}
+            </div>
+            <p></p>
+            <div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                or
+                <a href="{% url 'signup_user' %}" class="button btn btn-secondary">Sign Up</a>
+            </div>
+        </form>
+    </div>
+{% endblock site_content %}
