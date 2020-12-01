@@ -2,14 +2,14 @@
 {% block site_content %}
     <h1 class='text-center'>PICS</h1>
     <div class="row">
-        {% for pet in pets %}
+        {% for pic in pics %}
             <div class="col-lg-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ pet.image.url }}" class="card-img-top" alt="...">
+                    <img src="{{ pic.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{ pet.type }} {{ pet.name }}, Age: {{ pet.age }}</h5>
-                        <p class="card-text">{{ pet.description }}</p>
-                        <a href="{% url 'pet details or comment' pet.id %}" class="btn btn-primary">See details</a>
+                        <h5 class="card-title">{{ pic.type }} {{ pic.name }}</h5>
+                        <p class="card-text">{{ pic.description }}</p>
+                        <a href="{% url 'details or comment' pic.id %}" class="btn btn-primary">See details</a>
                     </div>
                 </div>
             </div>

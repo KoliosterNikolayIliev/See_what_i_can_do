@@ -4,20 +4,20 @@ from django.db import models
 from accounts.models import UserProfile
 
 
-class Art(models.Model):
+class Item(models.Model):
     PIC = 'pic'
     MOD = 'mod'
 
-    ART_TYPES = (
+    ITEM_TYPES = (
         (PIC, 'Picture'),
         (MOD, 'Model'),
 
     )
 
-    type = models.CharField(max_length=7, choices=ART_TYPES, default=None)
+    type = models.CharField(max_length=7, choices=ITEM_TYPES, default=None)
     name = models.CharField(max_length=6, blank=False)
     description = models.TextField(blank=False)
-    image = models.ImageField(upload_to='arts')
+    image = models.ImageField(upload_to='items')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -25,11 +25,12 @@ class Art(models.Model):
 
 
 class Like(models.Model):
-    art = models.ForeignKey(Art, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    value = models.CharField(max_length=2)
 
 
 class Comment(models.Model):
-    art = models.ForeignKey(Art, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     text = models.TextField(blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

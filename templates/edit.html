@@ -1,13 +1,13 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <h1 class="text-center">Edit pet photo</h1>
+    <h1 class="text-center">Edit picture</h1>
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <form method="post" action="{% url 'edit pet' pet.pk %}" class="furniture-form" enctype="multipart/form-data">
+            <form method="post" action="{% url 'edit' item.pk %}" class="furniture-form" enctype="multipart/form-data">
                 {{ form }}
                 {% csrf_token %}
-{#                <img id="img_preview" src="{{ pet.image.url }}" class="w-50 rounded mx-auto d-block"/>#}
+                <img id="img_preview" src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block"/>
                 <button class="btn btn-primary mt-2" type="submit">Edit</button>
             </form>
         </div>

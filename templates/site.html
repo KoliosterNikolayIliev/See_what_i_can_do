@@ -20,16 +20,16 @@
                    href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'list pets' %}active{% endif %}"
-                   href="{% url 'list pets' %}">Pictures</a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
+                   href="{% url 'list pics' %}">Pictures</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
                    href="{% url 'list mods' %}">Models</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'create pet' %}active{% endif %}"
-                   href="{% url 'create pet' %}">Add art !</a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}"
+                   href="{% url 'create' %}">Share with us !</a>
             </li>
         </ul>
     </div>
@@ -40,7 +40,7 @@
                 <li class="nav-item ml-auto">
 
                     <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
-                       href="{% url 'user_profile' user.id %}">
+                       href="{% url 'user profile' user.id %}">
                         <img class="rounded-circle mb-3" src="{% static './users.png' %}"
                              alt="Generic placeholder image"
                              width="30"
@@ -69,7 +69,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Sign up"
-                       href="{% url 'signup_user' %}">
+                       href="{% url 'signup user' %}">
                         <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
                              alt="Generic placeholder image"
                              width="30"

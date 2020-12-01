@@ -7,9 +7,9 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{ mod.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{ mod.type }} {{ mod.name }}, Age: {{ mod.age }}</h5>
+                        <h5 class="card-title">{{ mod.type }} {{ mod.name }}</h5>
                         <p class="card-text">{{ mod.description }}</p>
-                        <a href="{% url 'pet details or comment' mod.id %}" class="btn btn-primary">See details</a>
+                        <a href="{% url 'details or comment' mod.id %}" class="btn btn-primary">See details</a>
                     </div>
                 </div>
             </div>

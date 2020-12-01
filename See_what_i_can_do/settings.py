@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'See_what_i_can_do',
-    'arts',
+    'items',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
