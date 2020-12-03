@@ -1,0 +1,70 @@
+{% load static %}
+
+<nav class="navbar navbar-light header fixed-top" style="background: lightgoldenrodyellow">
+    <div class="col-auto">
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                   href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
+                   href="{% url 'list pics' %}">Pictures</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
+                   href="{% url 'list mods' %}">Models</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}"
+                   href="{% url 'create' %}">Share with us !</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-auto"></div>
+    <div class="col">
+        <ul class="nav">
+            {% if user.is_authenticated %}
+                <li class="nav-item ml-auto">
+
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
+                       href="{% url 'user profile' user.id %}">
+                        <img class="rounded-circle mb-3" src="{% static './users.png' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Logout"
+                       href="{% url 'logout' %}">
+                        <img class="rounded-circle mb-3" src="{% static './logout.webp' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+
+                </li>
+            {% else %}
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Login"
+                       href="{% url 'login' %}">
+                        <img class="rounded-circle mb-3" src="{% static './login.jpg' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Sign up"
+                       href="{% url 'signup user' %}">
+                        <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
+                             alt="Generic placeholder image"
+                             width="30"
+                             height="30">
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

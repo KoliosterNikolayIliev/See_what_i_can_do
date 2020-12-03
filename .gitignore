@@ -126,3 +126,9 @@ dmypy.json
 
 #IDE metadata
 .idea/
+
+media/items/*.*
+
+media/users/*.*
+
+

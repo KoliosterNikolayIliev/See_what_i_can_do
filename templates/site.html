@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,79 +11,20 @@
     <link rel="stylesheet" href=/static/css/main.css>
 </head>
 <body>
-<nav class="navbar navbar-light " style="margin-top:0.3%;margin-bottom: 2%;background: lightgoldenrodyellow">
-    <div class="col-auto">
-        <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
-                   href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
-                   href="{% url 'list pics' %}">Pictures</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
-                   href="{% url 'list mods' %}">Models</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}"
-                   href="{% url 'create' %}">Share with us !</a>
-            </li>
-        </ul>
+<div class="content">
+    <div class="content-inside">
+        {% include 'header.html' %}
     </div>
-    <div class="col-auto"></div>
-    <div class="col">
-        <ul class="nav">
-            {% if user.is_authenticated %}
-                <li class="nav-item ml-auto">
 
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
-                       href="{% url 'user profile' user.id %}">
-                        <img class="rounded-circle mb-3" src="{% static './users.png' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Logout"
-                       href="{% url 'logout' %}">
-                        <img class="rounded-circle mb-3" src="{% static './logout.webp' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
+    <div class="content-inside" style="height: auto">
 
-                </li>
-            {% else %}
-                <li class="nav-item ml-auto">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Login"
-                       href="{% url 'login' %}">
-                        <img class="rounded-circle mb-3" src="{% static './login.jpg' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Sign up"
-                       href="{% url 'signup user' %}">
-                        <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
+        <div class="container" style="width: auto">
+            {% block site_content %}
+            {% endblock site_content %}
+        </div>
     </div>
-</nav>
-<div class="container" style="width: auto">
-    {% block site_content %}
-    {% endblock site_content %}
 </div>
-
+{% include 'footer.html' %}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -94,5 +34,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
