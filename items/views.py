@@ -12,6 +12,7 @@ from items.models import Item, Like, Comment
 def index(request):
     return render(request, 'index.html')
 
+
 def list_items(request):
     return render(request, 'item_list.html')
 
@@ -34,7 +35,29 @@ def list_mods(request):
     return render(request, 'mod_list.html', context)
 
 
-def details_or_comment_art(request, pk):
+def comment_item(request, pk, item):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if item.user == request.user:
+        # TODO (404 page)
+        return HttpResponse('FORBIDDEN !')
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = Comment(text=form.cleaned_data['text'])
+        comment.user = request.user
+        comment.item = item
+        comment.save()
+        return redirect('details', pk)
+    context = {
+        'item': item,
+        'form': form,
+
+    }
+
+    return render(request, 'detail.html', context)
+
+
+def details(request, pk):
     item = Item.objects.get(pk=pk)
     if request.method == 'GET':
         context = {
@@ -49,23 +72,7 @@ def details_or_comment_art(request, pk):
 
         return render(request, 'detail.html', context)
     else:
-        if item.user == request.user:
-            #TODO (404 page)
-            return HttpResponse('FORBIDDEN !')
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = Comment(text=form.cleaned_data['text'])
-            comment.user = request.user
-            comment.item = item
-            comment.save()
-            return redirect('details or comment', pk)
-        context = {
-            'item': item,
-            'form': form,
-
-        }
-
-        return render(request, 'detail.html', context)
+        return comment_item(request, pk, item)
 
 
 def influence_item(request, item, template_name):
@@ -89,7 +96,7 @@ def influence_item(request, item, template_name):
             likes.delete()
             if old_image:
                 clean_up_files(old_image.path)
-            return redirect('details or comment', item.pk)
+            return redirect('details', item.pk)
 
         context = {
             'form': form,
@@ -142,5 +149,4 @@ def like_item(request, pk):
         like.item = item
         like.user = request.user
         like.save()
-    return redirect('details or comment', pk)
-
+    return redirect('details', pk)

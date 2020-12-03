@@ -2,7 +2,7 @@
 {% block site_content %}
     <div class="d-flex">
         <div class="d-inline p-2 w-50">
-            <img src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block">
+            <img src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block" alt="No image !">
         </div>
         <div class="d-inline p-2 w-50">
             <div class="d-flex justify-content-between">
@@ -17,14 +17,10 @@
                     <a href="{% url 'delete' item.pk %}" class="btn btn-danger">Delete</a>
                 </div>
             {% else %}
-                {% if user.is_authenticated %}
-                    {% if has_liked %}
-                        <a href="{% url 'like' item.id %}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                    {% else %}
-                        <a href="{% url 'like' item.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                    {% endif %}
+                {% if has_liked %}
+                    <a href="{% url 'like' item.id %}"><i class="fa fa-heart" aria-hidden="true"></i></a>
                 {% else %}
-                    <u>Likes can be made only by registered users.</u>
+                    <a href="{% url 'like' item.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                 {% endif %}
             {% endif %}
             <p class="mt-2">Likes: {{ item.like_set.count }}</p>
@@ -45,16 +41,12 @@
             </div>
         {% endif %}
         <div class="box">
-            {% if user.is_authenticated %}
-                {% if can_comment %}
-                    <form method="post" action="{% url 'details or comment' item.pk %}">
-                        {{ form }}
-                        {% csrf_token %}
-                        <button class="btn btn-primary mt-2" type="submit">Add comment</button>
-                    </form>
-                {% endif %}
-            {% else %}
-                <u>Comments can be made only by registered users.</u>
+            {% if can_comment %}
+                <form method="post" action="{% url 'details' item.pk %}">
+                    {{ form }}
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-2" type="submit">Add comment</button>
+                </form>
             {% endif %}
         </div>
     </div>
