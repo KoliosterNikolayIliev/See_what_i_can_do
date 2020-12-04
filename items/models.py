@@ -19,6 +19,9 @@ class Item(models.Model):
     description = models.TextField(blank=False)
     image = models.ImageField(upload_to='items')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    #TODO rating here and in the user profile.
 
     def __str__(self):
         return f'{self.id}; {self.name}'
@@ -34,3 +37,9 @@ class Comment(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     text = models.TextField(blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+
+
+
+

@@ -5,7 +5,7 @@
             <h1>Are you sure you want to delete {{ item.name }}?</h1>
             <div class="m-auto d-flex justify-content-center">
                 <div class="m-2">
-                    <form method="post" action="{% url 'delete ' item.pk %}">
+                    <form method="post" action="{% url 'delete' item.id %}">
                         {% csrf_token %}
                         <button class="btn btn-danger">
                             Confirm

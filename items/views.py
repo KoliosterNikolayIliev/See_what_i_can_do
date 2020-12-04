@@ -10,7 +10,13 @@ from items.models import Item, Like, Comment
 
 
 def index(request):
-    return render(request, 'index.html')
+    total_item_list = [item for item in Item.objects.all()]
+    items_dict = dict(
+        sorted({item: item.like_set.count() for item in total_item_list}.items(), key=lambda x: x[1], reverse=True))
+    items_list = [x for x in items_dict.keys()]
+    top_10 = [items_list[x] for x in range(10)]
+    context = {'top_ten': top_10}
+    return render(request, 'index.html', context)
 
 
 def list_items(request):
