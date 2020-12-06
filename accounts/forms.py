@@ -16,3 +16,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('profile_picture',)
+        widgets = {'profile_picture': forms.FileInput(
+            attrs={'onchange': 'submit();', 'class': 'form-control', 'required': False, }
+        )}

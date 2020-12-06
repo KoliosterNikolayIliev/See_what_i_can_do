@@ -1,31 +1,35 @@
 {% load static %}
 
-<nav class="card-navbar navbar-light header fixed-top" style="background-color: #e3f2fd; padding-top: 40px">
+<nav class="card-navbar navbar-light header fixed-top" style="background-color: blueviolet; padding-top: 40px">
     <div class="col-auto" style="height: 41px">
-        <ul class="nav nav-tabs" style="height: 41px" >
+        <ul class="nav nav-tabs" style="height: 41px">
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
-                   href="/">Home</a>
+                   {% if request.resolver_match.url_name == 'index' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: gold"{% endif %}
+                   href="/"><img alt="Generic placeholder image" width="17" height="17" src="https://www.pinclipart.com/picdir/big/74-740521_pacific-ridge-homepage-small-home-icon-png-clipart.png">  Home</a>
             </li>
-            <li class="nav-item" >
+            <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
-                   href="{% url 'list pics' %}">Pictures</a>
+                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: orangered"{% endif %}
+                   href="{% url 'list pics' %}">Drawings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
-                   href="{% url 'list mods' %}">Models</a>
+                   {% if request.resolver_match.url_name == 'list mods' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: salmon"{% endif %}
+                   href="{% url 'list mods' %}">Hand-made models</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}"
-                   href="{% url 'create' %}">Share with us !</a>
+                   {% if request.resolver_match.url_name == 'create' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: lime"{% endif %}
+                   href="{% url 'create' %}">Share yor Art !</a>
             </li>
 
             {% if user.is_authenticated %}
                 <li class="nav-item ml-auto">
 
                     <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
-                       href="{% url 'user profile' user.id %}" style="margin-top: -25px">
-                        <img class="rounded-circle mb-3" src="{% static './users.png' %}"
+                       href="{% url 'user profile' user.id %}" style="margin-top: -25px">Hello {{ user.username }}&nbsp;&nbsp;
+                         <img class="rounded-circle mb-3" src="{% static './users.png' %}"
                              alt="Generic placeholder image"
                              width="30"
                              height="30">
@@ -52,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Sign up"
+                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Register"
                        href="{% url 'signup user' %}" style="margin-top: -25px">
                         <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
                              alt="Generic placeholder image"

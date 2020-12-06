@@ -14,7 +14,13 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = '__all__'
-        widgets = {'image_url': forms.TextInput(attrs={'id': 'img_input', })}
+        labels = {
+            'description': 'Say something about it (optional)',
+            'image':'',
+        }
+        widgets = {'image': forms.FileInput(
+            attrs={'style': 'display: none;', 'class': 'form-control', 'required': False, }
+        )}
 
 
 class CommentForm(forms.Form):

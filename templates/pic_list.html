@@ -1,7 +1,7 @@
 {% extends 'site.html' %}
 
 {% block site_content %}
-    <h1 class='text-center' style="height: auto">PICS</h1>
+    <h1 class='text-center' style="height: auto">Drawings</h1>
     <div class="row">
         {% for pic in pics %}
             <div class="col-lg-4">
@@ -9,6 +9,7 @@
                     <img src="{{ pic.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ pic.type }} {{ pic.name }}</h5>
+                        <h5 class="card-title">{{ pic.date_created|date:"M, Y" }}</h5>
                         <p class="card-text">{{ pic.description }}</p>
                         <a href="{% url 'details' pic.id %}" class="btn btn-primary">See details</a>
                     </div>

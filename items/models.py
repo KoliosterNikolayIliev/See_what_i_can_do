@@ -5,16 +5,27 @@ from accounts.models import UserProfile
 
 
 class Item(models.Model):
-    PIC = 'pic'
-    MOD = 'mod'
 
     ITEM_TYPES = (
-        (PIC, 'Picture'),
-        (MOD, 'Model'),
+        ('pic', 'Picture'),
+        ('mod', 'Hand-made model'),
+
+    )
+
+    CATEGORY_TYPES = (
+        ('nat', 'Nature'),
+        ('fam', 'Family'),
+        ('ani', 'Animals'),
+        ('christ', 'Christmas'),
+        ('east', 'Easter'),
+        ('city', 'City'),
+        ('fun', 'Fun'),
+        ('other', 'Other'),
 
     )
 
     type = models.CharField(max_length=7, choices=ITEM_TYPES, default=None)
+    category = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='other', null=True)
     name = models.CharField(max_length=6, blank=False)
     description = models.TextField(blank=False)
     image = models.ImageField(upload_to='items')
@@ -24,7 +35,7 @@ class Item(models.Model):
     #TODO rating here and in the user profile.
 
     def __str__(self):
-        return f'{self.id}; {self.name}'
+        return f'{self.id}; {self.name}; {self.date_created};'
 
 
 class Like(models.Model):

@@ -1,7 +1,7 @@
 {% extends 'site.html' %}
 {% block site_content %}
     {#    <div class="jumbotron" style="background: lightgoldenrodyellow; width: 100%;margin-top: 3%">#}
-    <h1 class="display-4 text-center">Welcome to See what I can do</h1>
+    <h1 class="display-4 text-center">Welcome to Milena will tell</h1>
     {#    <img style="width: 100%"#}
     {#         src="https://www.minilabstudios.com/site/wp-content/uploads/2016/08/drawing-image-1.jpg" alt="">#}
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -18,13 +18,15 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
         </ol>
         <div class="carousel-inner container d-flex align-items-center"
-             style="width: 1600px !important; height: 800px !important; background: black">
+             style="width: 1280px !important; height: 720px !important;">
             {% for item in top_ten %}
-                <div class="carousel-item {% if forloop.first == 1 %}active{% endif %}" data-interval="15000">
+                <div class="carousel-item {% if forloop.first == 1 %}active{% endif %}" data-interval="10000">
                     <img src="{{ item.image.url }}" class="d-block w-100 h-100 " alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5><a href="{% url 'details' item.id %}"> Name: {{ item.name }}</a></h5>
                         <p><a href="{% url 'user profile' item.user_id %}">Creator: {{ item.user.username }}</a></p>
+                        <p>{{ item.type }}</p>
+                        <p>Likes: {{ item.like_set.count }}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -46,12 +48,11 @@
     </div>
     <div class="absolute">
 
-        <p class="text-center h4">Top 10 choices - click to influence !</p>
-        <br><br>
+        <p class="text-center h4">Current top 10 !</p>
         <div class="text-center">
 
-            <a href="{% url 'login' %}" class="btn btn-lg btn-success">Don't be shy, share your creations</a>
-
+            <a href="{% url 'login' %}" class="btn btn-lg btn-success">Don't be shy, upload, Milena will tell</a>
+             <br><br>
         </div>
     </div>
     {#    </div>#}

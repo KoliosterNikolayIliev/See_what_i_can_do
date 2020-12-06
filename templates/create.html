@@ -1,14 +1,22 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <h1 class="text-center">Add photo or model</h1>
+    <h1 class="text-center">Add drawing or hand-made model</h1>
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
             <form method="post" action="{% url 'create' %}" class="furniture-form"
                   enctype="multipart/form-data">
-                {{ form }}
                 {% csrf_token %}
-                <button class="btn btn-primary mt-2" type="submit">Create</button>
+                {{ form }}
+
+                    <label class="btn btn-primary mt-2">
+
+                        Choose image file
+                        {{ form.image }}
+
+                    </label>
+                    <br>
+                <button class="btn btn-primary mt-2" type="submit">Upload</button>
             </form>
         </div>
         <div class="col-lg-3"></div>

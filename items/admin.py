@@ -8,8 +8,8 @@ class LikeInline(admin.TabularInline):
 
 
 class ArtAdmin(admin.ModelAdmin):
-    list_display = ('id', 'type', 'name')
-    list_filter = ('type', 'id')
+    list_display = ('id', 'type', 'name', 'date_created')
+    list_filter = ('type', 'id', 'date_created')
     inlines = (
         LikeInline,
     )

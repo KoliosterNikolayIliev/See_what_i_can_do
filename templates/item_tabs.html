@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs" style="height: 41px">
+
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
+                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: gold"{% endif %}
+                   href="{% url 'list pics' %}">Drawings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
+                   {% if request.resolver_match.url_name == 'list mods' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: gold"{% endif %}
+                   href="{% url 'list mods' %}">Hand-made models</a>
+            </li>
+
+</ul>
+

@@ -19,10 +19,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def list_items(request):
-    return render(request, 'item_list.html')
-
-
 def list_pics(request):
     pics = Item.objects.filter(type='pic')
     context = {

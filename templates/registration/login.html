@@ -4,7 +4,7 @@
     <div class="container">
         <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
               action="{% url 'login' %}">
-            <h2>Sign In</h2>
+            <h2>Login</h2>
             {% csrf_token %}
             <div>
                 <div>
@@ -20,9 +20,9 @@
             </div>
             <p></p>
             <div>
-                <button type="submit" class="btn btn-primary">Sign In</button>
+                <button type="submit" class="btn btn-primary">Login</button>
                 or
-                <a href="{% url 'signup user' %}" class="button btn btn-secondary">Sign Up</a>
+                <a href="{% url 'signup user' %}" class="button btn btn-secondary">Register</a>
             </div>
         </form>
     </div>
