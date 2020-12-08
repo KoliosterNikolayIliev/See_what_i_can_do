@@ -11,5 +11,5 @@ urlpatterns = [
     path('signup/', signup_user, name='signup user'),
     path('delete_user/<int:pk>/', delete_user, name='delete user'),
     path('edit_user/<int:pk>/', edit_user, name='edit user'),
-    url(r'^password/', change_password, name='change_password')
+    url(r'^password/', change_password, name='change_password'),
 ]

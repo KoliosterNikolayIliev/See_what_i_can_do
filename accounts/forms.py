@@ -22,8 +22,9 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('profile_picture',)
         widgets = {'profile_picture': forms.FileInput(
-            attrs={'onchange': 'submit();', 'class': 'form-control', 'required': False, }
-        )}
+            attrs={'onchange': 'submit();', 'class': 'form-control', 'required': False, }),
+        }
+
 
 class ChangeForm(UserChangeForm):
     def __init__(self, *args, **kwargs):

@@ -23,7 +23,7 @@
                     <a href="{% url 'like' item.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                 {% endif %}
             {% endif %}
-            <p class="mt-2">Likes: {{ item.like_set.count }}</p>
+            <p class="mt-2">Thumbs: {{ item.like_set.count }}</p>
         </div>
     </div>
     <div class="d-block" style="background-color: #f1e3e3; padding:2%">
@@ -51,3 +51,8 @@
         </div>
     </div>
 {% endblock site_content %}
+
+<h5 class="card-title">{{ pic.type }} {{ pic.name }}</h5>
+                        <h5 class="card-title">{{ pic.date_created|date:"M, Y" }}</h5>
+                        <p class="card-text">{{ pic.description }}</p>
+                        <a href="{% url 'details' pic.id %}" class="btn btn-primary">See details</a>

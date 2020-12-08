@@ -17,11 +17,11 @@
                 {% for item in top_ten %}
                     <div class="carousel-item {% if forloop.first == 1 %}active{% endif %}" data-interval="10000">
                         <img src="{{ item.image.url }}" class="d-block w-100 h-100 " alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5><a href="{% url 'details' item.id %}"> Name: {{ item.name }}</a></h5>
-                            <p><a href="{% url 'user profile' item.user_id %}">Creator: {{ item.user.username }}</a></p>
-                            <p>{{ item.type }}</p>
-                            <p>Likes: {{ item.like_set.count }}</p>
+                        <div class="carousel-caption d-none d-md-block" style="text-align: left;">
+                            <p><a href="{% url 'details' item.id %}" style="color: lime" > Name: {{ item.name }}</a></p>
+                            <p><a href="{% url 'user profile' item.user_id %}" style="color: lime">Creator: {{ item.user.username }}</a></p>
+                            <p style="color: lime">{{ item.type }}</p>
+                            <p style="color: lime">Thumbs: {{ item.like_set.count }}</p>
                         </div>
                     </div>
                 {% endfor %}
