@@ -10,7 +10,7 @@
                 <h5><u>Name:</u> {{ item.name }}</h5>
                 <h5><u>Owner:</u> <a href="{% url 'user profile' item.user_id %}">{{ item.user.username }}</a></h5>
             </div>
-            <p class="mt-2">Description: {{ item.description }}</p>
+            <p class="mt-2">About: {{ item.description }}</p>
             {% if can_delete and can_edit %}
                 <div>
                     <a href="{% url 'edit' item.pk %}" class="btn btn-success">Edit</a>

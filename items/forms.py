@@ -13,15 +13,16 @@ class ItemForm(forms.ModelForm):
 
     class Meta:
         model = Item
-        fields = '__all__'
-        labels = {
-            'description': 'Say something about it (optional)',
-            'image':'',
-        }
+        fields = ('type', 'category', 'name', 'description', 'image','user')
+        # labels = {
+        #     'description': 'Say something about it (optional)',
+        #     'image': '',
+        # }
         widgets = {'image': forms.FileInput(
-            attrs={'style': 'display: none;', 'class': 'form-control', 'required': False, }
+            attrs={'style': 'display: none;','class': 'form-control', 'required': False, }
         )}
 
 
+#
 class CommentForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control rounded-2', }))

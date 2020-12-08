@@ -7,4 +7,4 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username};{self.id}'

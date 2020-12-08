@@ -9,12 +9,12 @@
 
                     <img class="rounded-circle mb-3" src="{{ profile_user.userprofile.profile_picture.url }}"
                          alt="Generic placeholder image" width="140"
-                         height="140">
+                         height="140" style="cursor: pointer">
 
                 {% else %}
                     <img class="rounded-circle mb-3" src="{% static './users.png' %}" alt="Generic placeholder image"
                          width="140"
-                         height="140">
+                         height="140" style="cursor: pointer">
                 {% endif %}
 
                 <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data"
@@ -23,6 +23,17 @@
                     {% csrf_token %}
                 </form>
             </label>
+        </div>
+        <div>
+            <p>{{ user.username }}</p>
+            <p>{{ user.email }}</p>
+            <p>{{ user.first_name }}</p>
+            <p>{{ user.last_name }}</p>
+
+            <div>
+                <a href="{% url 'edit user' user.pk %}" class="btn btn-success">Edit</a>
+                <a href="{% url 'delete user' user.pk %}" class="btn btn-danger">Delete</a>
+            </div>
         </div>
     {% else %}
         <div class="text-center">

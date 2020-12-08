@@ -10,13 +10,19 @@ from items.models import Item, Like, Comment
 
 
 def index(request):
-    total_item_list = [item for item in Item.objects.all()]
-    items_dict = dict(
-        sorted({item: item.like_set.count() for item in total_item_list}.items(), key=lambda x: x[1], reverse=True))
-    items_list = [x for x in items_dict.keys()]
-    top_10 = [items_list[x] for x in range(10)]
-    context = {'top_ten': top_10}
-    return render(request, 'index.html', context)
+    items = Item.objects.all()
+    if items:
+        total_item_list = [item for item in items]
+        items_dict = dict(
+            sorted({item: item.like_set.count() for item in total_item_list}.items(), key=lambda x: x[1], reverse=True))
+        items_list = [x for x in items_dict.keys() if x.like_set.count() > 0]
+        n = len(items_list)
+        if n >= 10:
+            n = 10
+        top_10 = [items_list[x] for x in range(n)]
+        context = {'top_ten': top_10, 'n': range(len(top_10))}
+        return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def list_pics(request):
@@ -91,7 +97,8 @@ def influence_item(request, item, template_name):
         return render(request, f'{template_name}.html', context)
     else:
         old_image = item.image
-        form = ItemForm(request.POST, request.FILES, instance=item)
+        user = request.user
+        form = ItemForm(request.POST, request.FILES, instance=item, initial={'user': user})
         if form.is_valid():
             form.save()
             likes = Like.objects.filter(item_id=item.pk)
@@ -136,8 +143,14 @@ def delete(request, pk):
 
         return render(request, 'delete.html', context)
     else:
+        image = item.image
+        url = 'list mods'
+        if item.type == 'pic':
+            url = 'list pics'
+        if image:
+            clean_up_files(image.path)
         item.delete()
-        return redirect('list items')
+        return redirect(url)
 
 
 @login_required

@@ -10,8 +10,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
-                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: orangered"{% endif %}
-                   href="{% url 'list pics' %}">Drawings</a>
+                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: orangered;"{% endif %}
+                   href="{% url 'list pics' %}" onmouseover="this.style.color='red';" onmouseout="this.style.color='';">Drawings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
