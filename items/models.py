@@ -26,7 +26,7 @@ class Item(models.Model):
     type = models.CharField(max_length=7, choices=ITEM_TYPES, default=None)
     category = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='other', null=True)
     name = models.CharField(max_length=6, blank=False)
-    description = models.TextField(blank=False)
+    description = models.TextField(blank=True)
     image = models.ImageField(upload_to='items')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)

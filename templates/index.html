@@ -20,8 +20,9 @@
                         <div class="carousel-caption d-none d-md-block" style="text-align: left;">
                             <p><a href="{% url 'details' item.id %}" style="color: lime" > Name: {{ item.name }}</a></p>
                             <p><a href="{% url 'user profile' item.user_id %}" style="color: lime">Creator: {{ item.user.username }}</a></p>
-                            <p style="color: lime">{{ item.type }}</p>
-                            <p style="color: lime">Thumbs: {{ item.like_set.count }}</p>
+                            <p style="color: lime">{% if item.type == pic %}Drawing{% else %}Hand made model{% endif %}</p>
+                            <p style="color: lime"><i class="fas fa-thumbs-up fa-2x"
+                                                  aria-hidden="true">{{ item.like_set.count }}</i></p>
                         </div>
                     </div>
                 {% endfor %}

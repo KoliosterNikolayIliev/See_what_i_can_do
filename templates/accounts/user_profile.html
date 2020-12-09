@@ -24,22 +24,34 @@
                 </form>
             </label>
         </div>
-        <h6 style="text-align: center">Click on the picture to change your userprofile picture</h6>
+        <h6 style="text-align: center">Click on the picture to change it</h6>
         <br>
         <br>
-        <div class="container" style="text-align: center">
-                <h4 style="margin-right: 6%">User data</h4>
-            <br>
-                <h5 style="margin-right: 1rem">Username: {{ user.username }}</h5>
-            <br>
-                <h5 style="margin-right: -1rem">Name: {{ user.first_name }} {{ user.last_name }}</h5>
-            <br>
-                <h5 style="margin-right: -8rem">E-mail: {{ user.email }}</h5>
-                <br>
-            <div class="container" style="width: 120px !important;">
-                <a href="{% url 'edit user' user.pk %}" class="btn btn-success btn-block">Edit</a>
-                <a href="{% url 'delete user' user.pk %}" class="btn btn-danger btn-block">Delete</a>
+        <div class="container" style="margin-left: 25%">
+            <div class="col-sm"
+                 style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px; width: 500px">
+                <div class="col">
+                    <h4 style="margin-right: 6%">User data</h4>
+                    <div class="row">
+                        <h5><u>Username: </u> {{ user.username }}</h5>
+                    </div>
+                    <div class="row">
+                        <h5><u>Name:</u> {{ user.first_name }} {{ user.last_name }}</h5>
+                    </div>
+                    <div class="row">
+                        <h5><u>E-mail: </u> {{ user.email }}</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6" style="width: 120px !important;">
+                            <a href="{% url 'edit user' user.pk %}" class="btn btn-success btn-block">Edit</a>
+                        </div>
+                        <div class="col-12 col-md-6" style="width: 120px !important;">
+                            <a href="{% url 'delete user' user.pk %}" class="btn btn-danger btn-block">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     {% else %}
         <div class="text-center">

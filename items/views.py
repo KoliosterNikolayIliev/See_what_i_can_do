@@ -128,7 +128,7 @@ def influence_item(request, item, template_name):
         return render(request, f'{template_name}.html', context)
 
 
-
+@login_required
 def edit(request, pk):
     item = Item.objects.get(pk=pk)
     if item.user != request.user:
