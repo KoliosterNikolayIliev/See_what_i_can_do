@@ -24,14 +24,21 @@
                 </form>
             </label>
         </div>
-        <div>
-            <p>{{ user.username }}</p>
-            <p>{{ user.email }}</p>
-            <p>{{ user.first_name }}</p>
-            <p>{{ user.last_name }}</p>
-            <div>
-                <a href="{% url 'edit user' user.pk %}" class="btn btn-success">Edit</a>
-                <a href="{% url 'delete user' user.pk %}" class="btn btn-danger">Delete</a>
+        <h6 style="text-align: center">Click on the picture to change your userprofile picture</h6>
+        <br>
+        <br>
+        <div class="container" style="text-align: center">
+                <h4 style="margin-right: 6%">User data</h4>
+            <br>
+                <h5 style="margin-right: 1rem">Username: {{ user.username }}</h5>
+            <br>
+                <h5 style="margin-right: -1rem">Name: {{ user.first_name }} {{ user.last_name }}</h5>
+            <br>
+                <h5 style="margin-right: -8rem">E-mail: {{ user.email }}</h5>
+                <br>
+            <div class="container" style="width: 120px !important;">
+                <a href="{% url 'edit user' user.pk %}" class="btn btn-success btn-block">Edit</a>
+                <a href="{% url 'delete user' user.pk %}" class="btn btn-danger btn-block">Delete</a>
             </div>
         </div>
     {% else %}
@@ -48,30 +55,73 @@
             {% endif %}
         </div>
     {% endif %}
-    <hr>
-    {% include 'item_tabs.html' %}
+    <br>
+
+
+
     {% if items %}
-        {% if user.id == profile_user.id %}
-            <h2 class='text-center'>Drawings</h2>
-        {% else %}
-            <h2 class='text-center'>{{ profile_user.username }}'s Drawings</h2>
-        {% endif %}
-        <div class="row">
-            <div class="row">
-                {% for item in items %}
-                    <div class="col-lg-4">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ item.image.url }}" class="card-img-top" alt="Image of {{ item.name }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ item.type }} {{ item.name }}, Age: {{ item.age }}</h5>
-                                <p class="card-text">{{ item.description }}</p>
-                                <p class="card-text"><strong>Owner: {{ user.userprofile }}</strong></p>
-                                <a href="{% url 'details' item.id %}" class="btn btn-primary">See
-                                    details</a>
-                            </div>
-                        </div>
+        <div class="container">
+            <div class="col-auto">
+                <ul class="nav nav-pills nav-fill border" style="background: darkviolet; border-radius: 5px">
+                    {% if pic_count > 0 %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="myLINK_draw" href="#"
+                               onclick="myFunction_draw();">{{ profile_user.username }}'s drawings,
+                                Count: {{ pic_count }}</a>
+                        </li>
+                    {% endif %}
+                    {% if mod_count > 0 %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="myLINK_mod" href="#"
+                               onclick="myFunction_mod()">{{ profile_user.username }}'s hand made models,
+                                Count: {{ mod_count }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="container">
+                <div class="row" id="myDIV" style="display: none">
+                    <div class="row">
+                        {% for item in items %}
+                            {% if item.type == 'pic' %}
+                                <div class="col-lg-4">
+                                    <div class="card" style="width: 22rem;">
+                                        <a href="{% url 'details' item.id %}"><img src="{{ item.image.url }}"
+                                                                                   class="card-img-top" alt="..."></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Name: {{ item.name }}</h5>
+                                            <h5 class="card-title">
+                                                Created: {{ item.date_created|date:"d ,D, M, Y" }}</h5>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            <div class="container">
+                <div class="row" id="myDIV2" style="display: none">
+                    <div class="row">
+                        {% for item in items %}
+                            {% if item.type == 'mod' %}
+                                <div class="col-lg-4">
+                                    <div class="card" style="width: 22rem;">
+                                        <a href="{% url 'details' item.id %}"><img src="{{ item.image.url }}"
+                                                                                   class="card-img-top" alt="..."></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Name: {{ item.name }}</h5>
+                                            <h5 class="card-title">
+                                                Created: {{ item.date_created|date:"d ,D, M, Y" }}</h5>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     {% else %}
@@ -80,4 +130,39 @@
             <a href="{% url 'create' %}" class="btn btn-success">Upload drawing or hand-made model</a>
         </div>
     {% endif %}
+
+    <script>function myFunction_draw() {
+        var x = document.getElementById("myDIV");
+        var y = document.getElementById("myDIV2");
+        var z = document.getElementById("myLINK_draw");
+        var w = document.getElementById("myLINK_mod");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none";
+            z.className = "nav-link active";
+            w.className = "nav-link";
+        } else {
+            x.style.display = "none";
+            z.className = "nav-link";
+
+        }
+    }
+    </script>
+
+    <script>function myFunction_mod() {
+        var x = document.getElementById("myDIV2");
+        var y = document.getElementById("myDIV");
+        var z = document.getElementById("myLINK_mod");
+        var w = document.getElementById("myLINK_draw");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none";
+            z.className = "nav-link active";
+            w.className = "nav-link";
+        } else {
+            x.style.display = "none";
+            z.className = "nav-link";
+        }
+    }
+    </script>
 {% endblock site_content %}

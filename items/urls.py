@@ -1,5 +1,5 @@
 
-from django.urls import path
+from django.urls import path, include
 
 from items.views import index, list_pics, list_mods, details, like_item, edit, delete, create
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('edit/<int:pk>/', edit, name='edit'),
     path('delete/<int:pk>/', delete, name='delete'),
     path('create/', create, name='create'),
+    path('', include('accounts.urls')),
 ]

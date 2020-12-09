@@ -1,53 +1,44 @@
 {% extends 'site.html' %}
 {% block site_content %}
     <h1 class='text-center' style="height: auto">Drawings</h1>
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_object.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_object.previous_page_number }}">previous</a>
+    <div class="content-inside" style="font-size: 25px">
+        {% if page_object.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                {% if page_object.has_previous %}
+                    <li><a class="page-link" href="?page={{ page_object.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled page-link"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in page_object.paginator.page_range %}
+                    {% if page_object.number == i %}
+                        <li class="active page-link"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_object.has_next %}
+                    <li><a class="page-link" href="?page={{ page_object.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled page-link"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
         {% endif %}
-
-        <span class="current">
-            Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
-        </span>
-
-        {% if page_object.has_next %}
-            <a href="?page={{ page_object.next_page_number }}">next</a>
-            <a href="?page={{ page_object.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
     </div>
-    <br>
-    <div class="row">
-        {% for pic in page_object %}
-            <div class="col-lg-4">
-                <div class="card" style="width: 22rem;">
-                    <a href="{% url 'details' pic.id %}"><img src="{{ pic.image.url }}" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                        <h5 class="card-title">Name: {{ pic.name }}</h5>
+    <div class="container">
+        <div class="row">
+            {% for pic in page_object %}
+                <div class="col-lg-4">
+                    <div class="card" style="width: 22rem;">
+                        <a href="{% url 'details' pic.id %}"><img src="{{ pic.image.url }}" class="card-img-top"
+                                                                  alt="..."></a>
+                        <div class="card-body">
+                            <h5 class="card-title">Name: {{ pic.name }}</h5>
+                            <h5 class="card-title">Created: {{ pic.date_created|date:"M, Y" }}</h5>
+                        </div>
                     </div>
+                    <br>
                 </div>
-                <br>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_object.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_object.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
-        </span>
-
-        {% if page_object.has_next %}
-            <a href="?page={{ page_object.next_page_number }}">next</a>
-            <a href="?page={{ page_object.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
-    <br>
 {% endblock site_content %}

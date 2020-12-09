@@ -1,3 +1,4 @@
+
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -8,6 +9,7 @@ from items.forms import CommentForm, ItemForm
 from items.tools.clean_up import clean_up_files
 
 from items.models import Item, Like, Comment
+
 
 
 def index(request):
@@ -28,13 +30,13 @@ def index(request):
 
 def list_pics(request):
     pics = Item.objects.filter(type='pic')
-    paginator = Paginator(pics, 9)
+    paginator = Paginator(pics, 6)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'pics': pics,
-        'page_object':page_obj
+        'page_object': page_obj,
     }
 
     return render(request, 'pic_list.html', context)
@@ -42,8 +44,12 @@ def list_pics(request):
 
 def list_mods(request):
     mods = Item.objects.filter(type='mod')
+    paginator = Paginator(mods, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'mods': mods,
+        'page_object': page_obj,
     }
 
     return render(request, 'mod_list.html', context)
@@ -95,6 +101,7 @@ def influence_item(request, item, template_name):
         form = ItemForm(instance=item, initial={'user': user})
         form.fields['user'].widget = forms.HiddenInput()
 
+
         context = {
             'form': form,
             'item': item,
@@ -121,7 +128,7 @@ def influence_item(request, item, template_name):
         return render(request, f'{template_name}.html', context)
 
 
-# @user_required(Item, methods=['GET'])
+
 def edit(request, pk):
     item = Item.objects.get(pk=pk)
     if item.user != request.user:
@@ -150,13 +157,10 @@ def delete(request, pk):
         return render(request, 'delete.html', context)
     else:
         image = item.image
-        url = 'list mods'
-        if item.type == 'pic':
-            url = 'list pics'
         if image:
             clean_up_files(image.path)
         item.delete()
-        return redirect(url)
+        return redirect('current user profile')
 
 
 @login_required

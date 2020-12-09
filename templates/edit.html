@@ -4,23 +4,42 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <form method="post" action="{% url 'edit' item.pk %}" class="furniture-form" enctype="multipart/form-data">
-                {{ form }}
+            <form method="post" action="{% url 'edit' item.id %}"
+                  enctype="multipart/form-data" class="w-100 m-auto" method="post"
+                  style="border: 1px solid grey;border-radius: 25px; padding: 5% 5%; background: blueviolet ">
                 {% csrf_token %}
-                <img id="img_preview" src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block " alt="No Image"/>
-                <button class="btn btn-primary mt-2" type="submit">Edit</button>
+                <label> Type:
+                    {{ form.type }}
+                </label>
+                <label> Category:
+                    {{ form.category }}
+                </label>
+                <label> Name:
+                    {{ form.name }}
+                </label>
+                <label style="width: 100%"> Say something about it (optional):
+                    {{ form.description }}
+                </label>
+                {{ form.user }}
+                <div>
+                    <label class="btn btn-primary mt-2" style="cursor: pointer">
+                        Choose image file
+                        {{ form.image }}
+                    </label>
+                    <br>
+                    <div class="row" style="margin-left: -0.5em">
+                        <div class="m-2">
+                    <button class="btn btn-primary mt-2" type="submit">Edit</button>
+                        </div>
+                    <div class="m-2">
+                        <a class="btn btn-primary mt-2" href="javascript:history.back()">Cancel</a>
+                    </div>
+                    </div>
+                </div>
+
             </form>
         </div>
         <div class="col-lg-3"></div>
     </div>
-    <script>
-        function updateImage() {
-            var img = document.getElementById('img_preview');
-            var url = this.value;
-            img.src = url;
-        }
 
-        document.getElementById('img_input')
-            .addEventListener('input', updateImage);
-    </script>
-{% endblock site_content%}
+{% endblock site_content %}

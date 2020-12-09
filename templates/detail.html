@@ -1,32 +1,42 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <div class="d-flex">
-        <div class="d-inline p-2 w-50">
-            <img src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block" alt="No image !">
-        </div>
-        <div class="d-inline p-2 w-50">
-            <div class="d-flex justify-content-between">
-                <h5><u>Type:</u> {{ item.type }}</h5>
-                <h5><u>Name:</u> {{ item.name }}</h5>
-                <h5><u>Owner:</u> <a href="{% url 'user profile' item.user_id %}">{{ item.user.username }}</a></h5>
-            </div>
-            <p class="mt-2">About: {{ item.description }}</p>
-            {% if can_delete and can_edit %}
-                <div>
-                    <a href="{% url 'edit' item.pk %}" class="btn btn-success">Edit</a>
-                    <a href="{% url 'delete' item.pk %}" class="btn btn-danger">Delete</a>
-                </div>
-            {% else %}
-                {% if has_liked %}
-                    <a href="{% url 'like' item.id %}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                {% else %}
-                    <a href="{% url 'like' item.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                {% endif %}
-            {% endif %}
-            <p class="mt-2">Thumbs: {{ item.like_set.count }}</p>
-        </div>
+    <div class="content-inside text-center" style="width: 60rem;height: 40rem; margin-bottom: 2%; margin-left: 4%">
+        <img src="{{ item.image.url }}" alt="No image !" style="width: 60rem;height: 40rem">
     </div>
-    <div class="d-block" style="background-color: #f1e3e3; padding:2%">
+    <div class="content-inside" style="margin-left: 37%">
+    {% if can_delete and can_edit %}
+        <div>
+            <a href="{% url 'edit' item.pk %}" class="btn btn-success">Edit</a>
+            <a href="{% url 'delete' item.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    {% else %}
+        {% if has_liked %}
+            <a href="{% url 'like' item.id %}"><i class="fas fa-thumbs-up fa-7x"
+                                                  aria-hidden="true">{{ item.like_set.count }}</i></a>
+        {% else %}
+            <a href="{% url 'like' item.id %}"><i class="far fa-thumbs-up fa-7x"
+                                                  aria-hidden="true">{{ item.like_set.count }}</i></a>
+        {% endif %}
+    {% endif %}
+    </div>
+    <div class="content-inside" style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px;">
+    <div class="row">
+            <div class="col-sm">
+                <h5><u>Category:</u> {{ item.category }}</h5>
+            </div>
+            <div class="col-sm">
+                <h5><u>Name:</u> {{ item.name }}</h5>
+            </div>
+            <div class="col-sm">
+                <h5><u>Creator:</u> <a href="{% url 'user profile' item.user_id %}">{{ item.user.username }}</a></h5>
+            </div>
+            <div>
+                <h5>Date created: {{ item.date_created|date:"D, d, M, Y" }}</h5>
+            </div>
+        </div>
+        <div class="text fieldBox">
+            <p class="mt-6">About: {{ item.description }}</p>
+        </div>
         {% if item.comment_set.count > 0 %}
             {% for comment in item.comment_set.all %}
                 <div class="box">
@@ -37,7 +47,8 @@
             {% endfor %}
         {% else %}
             <div class="box">
-                <h3>There are no comments for this photo. </h3>
+                <h3>There are no comments for this {% if item.type == 'pic' %} Drawing{% else %} Hand made
+                    model{% endif %}. </h3>
             </div>
         {% endif %}
         <div class="box">
@@ -51,8 +62,3 @@
         </div>
     </div>
 {% endblock site_content %}
-
-<h5 class="card-title">{{ pic.type }} {{ pic.name }}</h5>
-                        <h5 class="card-title">{{ pic.date_created|date:"M, Y" }}</h5>
-                        <p class="card-text">{{ pic.description }}</p>
-                        <a href="{% url 'details' pic.id %}" class="btn btn-primary">See details</a>

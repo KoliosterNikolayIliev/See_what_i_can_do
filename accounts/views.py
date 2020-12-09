@@ -14,9 +14,11 @@ from items.tools.clean_up import clean_up_files
 def user_profile(request, pk=None):
     user = request.user if pk is None else User.objects.get(pk=pk)
     items = user.item_set.all()
+    pic_count = len([x for x in items if x.type == 'pic'])
+    mod_count = len([x for x in items if x.type == 'mod'])
     form = UserProfileForm()
     if request.method == 'GET':
-        context = {'profile_user': user, 'items': items, 'form': form, }
+        context = {'profile_user': user, 'items': items, 'form': form, 'pic_count': pic_count, 'mod_count': mod_count, }
         return render(request, 'accounts/user_profile.html', context)
     else:
         form = UserProfileForm(request.POST, request.FILES, instance=user.userprofile)
