@@ -1,5 +1,13 @@
 {% extends 'site.html' %}
 {% block site_content %}
+    <div class="col">
+        <form method="post" action="{% url 'list mods' %}">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-primary mt-2">Filter</button>
+            <a href="{% url 'list mods' %}" class="btn btn-primary mt-2">Reset</a>
+        </form>
+    </div>
     <h1 class='text-center' style="height: auto">Hand made models</h1>
     <div class="container">
         {% if page_object.has_other_pages %}

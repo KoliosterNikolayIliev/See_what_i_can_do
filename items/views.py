@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from items.forms import CommentForm, ItemForm
+from items.forms import CommentForm, ItemForm, FilterForm
 from items.tools.clean_up import clean_up_files
 
 from items.models import Item, Like, Comment
@@ -30,13 +30,28 @@ def index(request):
 
 def list_pics(request):
     pics = Item.objects.filter(type='pic')
-    paginator = Paginator(pics, 9)
-
+    paginator = Paginator(pics, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = FilterForm()
+    if request.method == 'POST':
+        category = request.POST.dict()['category']
+        filtered_pics = [x for x in pics.filter(category=category)]
+        paginator = Paginator(filtered_pics, 3)
+        page_obj = paginator.get_page(page_number)
+        form = FilterForm(initial={'category': category})
+        context = {
+            'pics': filtered_pics,
+            'page_object': page_obj,
+            'form': form,
+        }
+
+        return render(request, 'pic_list.html', context)
+
     context = {
         'pics': pics,
         'page_object': page_obj,
+        'form': form,
     }
 
     return render(request, 'pic_list.html', context)
@@ -44,12 +59,27 @@ def list_pics(request):
 
 def list_mods(request):
     mods = Item.objects.filter(type='mod')
-    paginator = Paginator(mods, 6)
+    paginator = Paginator(mods, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    form = FilterForm()
+    if request.method == 'POST':
+        category = request.POST.dict()['category']
+        filtered_mods = [x for x in mods.filter(category=category)]
+        paginator = Paginator(filtered_mods, 3)
+        page_obj = paginator.get_page(page_number)
+        form = FilterForm(initial={'category': category})
+        context = {
+            'pics': filtered_mods,
+            'page_object': page_obj,
+            'form': form,
+        }
+
+        return render(request, 'mod_list.html', context)
     context = {
         'mods': mods,
         'page_object': page_obj,
+        'form': form,
     }
 
     return render(request, 'mod_list.html', context)

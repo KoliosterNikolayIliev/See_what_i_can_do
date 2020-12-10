@@ -5,29 +5,30 @@
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
             <form method="post" action="{% url 'create' %}"
-                  enctype="multipart/form-data" class="w-100 m-auto" method="post" style="border: 1px solid grey;border-radius: 25px; padding: 5% 5%; background: blueviolet ">
+                  enctype="multipart/form-data" class="w-100 m-auto" method="post"
+                  style="border: 1px solid grey;border-radius: 25px; padding: 5% 5%; background: blueviolet ">
                 {% csrf_token %}
                 <label> Type:
-                {{ form.type }}
+                    {{ form.type }}
                 </label>
                 <label> Category:
-                {{ form.category }}
+                    {{ form.category }}
                 </label>
                 <label> Name:
-                {{ form.name }}
+                    {{ form.name }}
                 </label>
                 <label style="width: 100%"> Say something about it (optional):
-                {{ form.description }}
+                    {{ form.description }}
                 </label>
                 {{ form.user }}
                 <div>
-                <label class="btn btn-primary mt-2" style="cursor: pointer">
-                    Choose image file
-                    {{ form.image }}
-                </label>
-                <br>
-                <button class="btn btn-primary mt-2" type="submit">Upload</button>
-                    </div>
+                    <label class="btn btn-primary mt-2" style="cursor: pointer">
+                        Choose image file
+                        {{ form.image }}
+                    </label>
+                    <br>
+                    <button class="btn btn-primary mt-2" type="submit">Upload</button>
+                </div>
             </form>
         </div>
         <div class="col-lg-3"></div>
