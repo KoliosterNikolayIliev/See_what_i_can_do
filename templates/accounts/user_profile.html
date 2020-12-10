@@ -12,7 +12,7 @@
                          height="140" style="cursor: pointer">
 
                 {% else %}
-                    <img class="rounded-circle mb-3" src="{% static './users.png' %}" alt="Generic placeholder image"
+                    <img class="rounded-circle mb-3" src="{% static '/users.png' %}" alt="Generic placeholder image"
                          width="140"
                          height="140" style="cursor: pointer">
                 {% endif %}
@@ -52,7 +52,6 @@
                 </div>
             </div>
         </div>
-        </div>
     {% else %}
         <div class="text-center">
             <h1>All photos of {{ profile_user.username }}!</h1>
@@ -61,7 +60,7 @@
                      alt="Generic placeholder image" width="140"
                      height="140">
             {% else %}
-                <img class="rounded-circle mb-3" src="{% static './users.png' %}" alt="Generic placeholder image"
+                <img class="rounded-circle mb-3" src="{% static '/users.png' %}" alt="Generic placeholder image"
                      width="140"
                      height="140">
             {% endif %}

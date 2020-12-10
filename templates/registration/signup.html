@@ -7,11 +7,11 @@
             <div class="col-lg-6">
                 <form action="{% url 'signup user' %}" style="border: 1px solid grey;border-radius: 25px; margin: 10% 0%; padding: 10% 5%; background: blueviolet"
                       method="post">
-                    <h2>Sign up</h2>
+                    <h2 style="text-align: center">Register</h2>
                     {% csrf_token %}
                     {{ form }}
                     <div>
-                        <button class="btn btn-primary form-control" type="submit">Sign up</button>
+                        <button class="btn btn-primary form-control" type="submit">Register</button>
                     </div>
                     <span>Have an account?<a href="{% url 'login' %}" style="color:orange">Login</a></span>
                 </form>

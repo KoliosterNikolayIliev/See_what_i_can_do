@@ -1,70 +1,95 @@
 {% load static %}
 
-<nav class="card-navbar navbar-light header fixed-top" style="background-color: blueviolet; padding-top: 40px">
-    <div class="col-auto" style="height: 41px">
-        <ul class="nav nav-tabs" style="height: 41px">
+<nav class="card-navbar navbar-light fixed-top" style="background-color: blueviolet; padding-top: 40px">
+
+    <div class="col-auto">
+        <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
-                   {% if request.resolver_match.url_name == 'index' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: gold"{% endif %}
-                   href="/" onmouseover="this.style.color='red';" onmouseout="this.style.color='gold';"><img alt="Generic placeholder image" width="19" height="19" src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/Folder%20and%20Places/Home.png">  Home</a>
+                   {% if request.resolver_match.url_name == 'index' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;"
+                   {% else %}style="color: gold"{% endif %}
+                   href="/" onmouseover="this.style.color='red';" onmouseout="this.style.color='gold';"><img
+                        alt="Generic placeholder image" width="19" height="19"
+                        src="https://cdn4.iconfinder.com/data/icons/devine_icons/Black/PNG/Folder%20and%20Places/Home.png">
+                    Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list pics' %}active{% endif %}"
-                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: greenyellow;"{% endif %}
-                   href="{% url 'list pics' %}" onmouseover="this.style.color='red';" onmouseout="this.style.color='greenyellow';" ><img alt="Generic placeholder image" width="17" height="17" src="https://www.brandeps.com/icon-download/C/Color-palette-icon-vector-02.svg">  Drawings</a>
+                   {% if request.resolver_match.url_name == 'list pics' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;"
+                   {% else %}style="color: greenyellow;"{% endif %}
+                   href="{% url 'list pics' %}" onmouseover="this.style.color='red';"
+                   onmouseout="this.style.color='greenyellow';"><img alt="Generic placeholder image" width="17"
+                                                                     height="17"
+                                                                     src="https://www.brandeps.com/icon-download/C/Color-palette-icon-vector-02.svg">
+                    Drawings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'list mods' %}active{% endif %}"
-                   {% if request.resolver_match.url_name == 'list mods' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: salmon"{% endif %}
-                   href="{% url 'list mods' %}" onmouseover="this.style.color='red';" onmouseout="this.style.color='orangered';"><img alt="Generic placeholder image" width="18" height="18" src="https://www.flaticon.com/svg/static/icons/svg/3655/3655191.svg">  Hand-made models</a>
+                   {% if request.resolver_match.url_name == 'list mods' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;"
+                   {% else %}style="color: salmon"{% endif %}
+                   href="{% url 'list mods' %}" onmouseover="this.style.color='red';"
+                   onmouseout="this.style.color='orangered';"><img alt="Generic placeholder image" width="18"
+                                                                   height="18"
+                                                                   src="https://www.flaticon.com/svg/static/icons/svg/3655/3655191.svg">
+                    Hand-made models</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}"
-                   {% if request.resolver_match.url_name == 'create' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;" {% else %}style="color: lime"{% endif %}
-                   href="{% url 'create' %}" onmouseover="this.style.color='red';" onmouseout="this.style.color='lime';"><img alt="Generic placeholder image" width="18" height="18" src="https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png">  Upload image</a>
+                   {% if request.resolver_match.url_name == 'create' %}style="background: beige;border-color: #dee2e6 #dee2e6 beige;"
+                   {% else %}style="color: lime"{% endif %}
+                   href="{% url 'create' %}" onmouseover="this.style.color='red';"
+                   onmouseout="this.style.color='lime';"><img alt="Generic placeholder image" width="18" height="18"
+                                                              src="https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png">
+                    Upload image</a>
             </li>
-
-            {% if user.is_authenticated %}
-                <li class="nav-item ml-auto">
-
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
-                       href="{% url 'user profile' user.id %}" style="margin-top: -25px">Hello {{ user.username }}&nbsp;&nbsp;
-                         <img class="rounded-circle mb-3" src="{{ user.userprofile.profile_picture.url }}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Logout"
-                       href="{% url 'logout' %}" style="margin-top: -25px">
-                        <img class="rounded-circle mb-3" src="{% static './logout.webp' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-
-                </li>
-            {% else %}
-                <li class="nav-item ml-auto">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Login"
-                       href="{% url 'login' %}" style="margin-top: -25px">
-                        <img class="rounded-circle mb-3" src="{% static './login.jpg' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Register"
-                       href="{% url 'signup user' %}" style="margin-top: -25px">
-                        <img class="rounded-circle mb-3" src="{% static './sign_up.jpg' %}"
-                             alt="Generic placeholder image"
-                             width="30"
-                             height="30">
-                    </a>
-                </li>
-            {% endif %}
+            <li class="nav-item" style="margin-left: auto">
+                <div class="row">
+                    {% if user.is_authenticated %}
+                        {% if user.userprofile.profile_picture %}
+                            <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
+                               href="{% url 'user profile' user.id %}"
+                               style="margin-top: -25px;">Hello {{ user.username }}&nbsp;&nbsp;
+                                <img class="rounded-circle mb-3" src="{{ user.userprofile.profile_picture.url }}"
+                                     alt="Generic placeholder image"
+                                     width="30"
+                                     height="30">
+                            </a>
+                        {% else %}
+                            <a class="nav-link" data-toggle="tooltip" data-placement="down" title="{{ user.username }}"
+                               href="{% url 'user profile' user.id %}"
+                               style="margin-top: -25px;">Hello {{ user.username }}&nbsp;&nbsp;
+                                <img class="rounded-circle mb-3" src="{% static '/users.png' %}"
+                                     alt="Generic placeholder image"
+                                     width="30"
+                                     height="30">
+                            </a>
+                        {% endif %}
+                            <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Logout"
+                               href="{% url 'logout' %}" style="margin-top: -25px">
+                                <img class="rounded-circle mb-3" src="{% static '/logout.webp' %}"
+                                     alt="Generic placeholder image"
+                                     width="30"
+                                     height="30">
+                            </a>
+                    {% else %}
+                            <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Login"
+                               href="{% url 'login' %}" style="margin-top: -25px">
+                                <img class="rounded-circle mb-3" src="{% static '/login.jpg' %}"
+                                     alt="Generic placeholder image"
+                                     width="30"
+                                     height="30">
+                            </a>
+                            <a class="nav-link" data-toggle="tooltip" data-placement="down" title="Register"
+                               href="{% url 'signup user' %}" style="margin-top: -25px;">
+                                <img class="rounded-circle mb-3" src="{% static '/sign_up.jpg' %}"
+                                     alt="Generic placeholder image"
+                                     width="30"
+                                     height="30">
+                            </a>
+                    {% endif %}
+                </div>
+            </li>
         </ul>
     </div>
+
 </nav>

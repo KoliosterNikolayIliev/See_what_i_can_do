@@ -30,7 +30,7 @@ def index(request):
 
 def list_pics(request):
     pics = Item.objects.filter(type='pic')
-    paginator = Paginator(pics, 6)
+    paginator = Paginator(pics, 9)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

@@ -1,9 +1,9 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <div class="content-inside text-center" style="width: 60rem;height: 40rem; margin-bottom: 2%; margin-left: 4%">
+    <div class="container text-center" style="width: 60rem;height: 40rem; margin-bottom: 2%; margin-left: 4%">
         <img src="{{ item.image.url }}" alt="No image !" style="width: 60rem;height: 40rem">
     </div>
-    <div class="content-inside" style="margin-left: 37%">
+    <div class="container" style="margin-left: 37%">
     {% if can_delete and can_edit %}
         <div>
             <a href="{% url 'edit' item.pk %}" class="btn btn-success">Edit</a>
@@ -19,7 +19,7 @@
         {% endif %}
     {% endif %}
     </div>
-    <div class="content-inside" style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px;">
+    <div class="container" style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px;">
     <div class="row">
             <div class="col-sm">
                 <h5><u>Category:</u> {{ item.category }}</h5>
