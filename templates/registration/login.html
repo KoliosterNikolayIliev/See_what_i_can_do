@@ -4,7 +4,7 @@
     <br>
     <br>
     <br>
-    <div class="container" style="text-align: center">
+    <div class="container" style="text-align: center; color: white">
         <form class="w-50 m-auto" method="post" style="border: 1px solid grey;border-radius: 25px; margin: 10% 0%; padding: 5% 5%; background: blueviolet "
               action="{% url 'login' %}">
             <h2>Login</h2>
@@ -24,11 +24,11 @@
                 {{ form.password }}
             </div>
             <p></p>
-            <div style="margin-right: 29%">
+            <div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <br>
                 <br>
-                You don't have an account ? <a href="{% url 'signup user' %}" style="color: orangered">Register</a>
+                <span style="margin-left: 10px">You don't have an account? <a style="color: orange" href="{% url 'signup user' %}">Register</a></span>
             </div>
         </form>
     </div>

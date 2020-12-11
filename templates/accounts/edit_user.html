@@ -1,7 +1,7 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <h1 class="text-center" style="padding-bottom: 3%">Edit</h1>
-    <div class="col" style="margin-left: 37%">
+    <h1 class="text-center" style="padding-bottom: 3%; margin-top: 10%">Edit</h1>
+    <div class="col" style="margin-left: 37%; color: white">
         <div class="col-lg-3">
             <form method="post" action="{% url 'edit user' user.pk %}"
                   enctype="multipart/form-data" class="w-100 m-auto" method="post"
@@ -23,13 +23,13 @@
                     <br>
                     <div class="row" style="margin-left: -0.5em">
                         <div class="m-2">
-                            <button class="btn btn-primary mt-2" style="width: 95px !important;" type="submit">Edit</button>
+                            <button class="btn btn-primary mt-2" style="width: 95px" type="submit">Save</button>
                         </div>
                         <div class="m-2">
-                            <a class="btn btn-primary mt-2 " style="width: 95px !important;" href="javascript:history.back()">Cancel</a>
+                            <a class="btn btn-primary mt-2 " style="width: 99px" href="javascript:history.back()">Cancel</a>
                         </div>
                         <div class="m-2">
-                            <a class="btn btn-primary mt-2 " style="width: 200px !important;" href="{% url 'change_password' %} }">Change password</a>
+                            <a class="btn btn-primary mt-2 " style="width: 140%" href="{% url 'change_password' %} }">Change password</a>
                         </div>
                     </div>
                 </div>

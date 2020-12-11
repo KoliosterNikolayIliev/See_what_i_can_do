@@ -3,7 +3,7 @@
 {% block site_content %}
     {% if user.id == profile_user.id %}
         <div class="text-center">
-            <h1>Hello, {{ profile_user.username }}!</h1>
+            <h1 style="margin-top: 10%">Hello, {{ profile_user.username }}!</h1>
             <label>
                 {% if profile_user.userprofile.profile_picture %}
 
@@ -24,12 +24,12 @@
                 </form>
             </label>
         </div>
-        <h6 style="text-align: center">Click on the picture to change it</h6>
+        <h6 style="text-align: center">Click on the picture to change it.</h6>
         <br>
         <br>
         <div class="container" style="margin-left: 25%">
             <div class="col-sm"
-                 style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px; width: 500px">
+                 style="background-color: blueviolet;color: white; padding:2%; border: 1px solid grey;border-radius: 25px; width: 500px">
                 <div class="col">
                     <h4 style="margin-right: 6%">User data</h4>
                     <div class="row">
@@ -54,7 +54,7 @@
         </div>
     {% else %}
         <div class="text-center">
-            <h1>All photos of {{ profile_user.username }}!</h1>
+            <h1 style="margin-top: 10%">All photos of {{ profile_user.username }}!</h1>
             {% if profile_user.userprofile.profile_picture %}
                 <img class="rounded-circle mb-3" src="{{ profile_user.userprofile.profile_picture.url }}"
                      alt="Generic placeholder image" width="140"
@@ -69,7 +69,7 @@
         <div class="container" style="margin-left: 25%">
 
             <div class="text-center"
-                 style="background-color: darkgoldenrod; padding:2%; border: 1px solid grey;border-radius: 25px; width: 500px">
+                 style="background-color: blueviolet;color: white; padding:2%; border: 1px solid grey;border-radius: 25px; width: 500px">
                 <div class="col">
                     <h4 style="margin-right: 6%">User data</h4>
                     <div class="row">
@@ -92,7 +92,7 @@
         {% if items %}
             <div class="container">
                 <div class="col-auto">
-                    <ul class="nav nav-pills nav-fill border" style="background: darkviolet; border-radius: 5px">
+                    <ul class="nav nav-pills nav-fill border" style="background: blueviolet; border-radius: 5px">
                         {% if pic_count > 0 %}
                             <li class="nav-item">
                                 <a class="nav-link" id="myLINK_draw" href="#"
@@ -158,8 +158,8 @@
             </div>
         {% else %}
             <div class="text-center">
-                <h2>You have nothing uploaded</h2>
-                <a href="{% url 'create' %}" class="btn btn-success">Upload drawing or hand-made model</a>
+                <h2 style="margin-right: 1%">You have nothing uploaded</h2>
+                <a style="margin-right: 3%" href="{% url 'create' %}" class="btn btn-success">Upload drawing or hand-made model</a>
             </div>
         {% endif %}
 

@@ -6,7 +6,7 @@ from accounts.models import UserProfile
 
 class Item(models.Model):
     ITEM_TYPES = (
-        ('pic', 'Picture'),
+        ('pic', 'Drawing'),
         ('mod', 'Hand-made model'),
 
     )
@@ -25,7 +25,7 @@ class Item(models.Model):
 
     type = models.CharField(max_length=7, choices=ITEM_TYPES, default=None)
     category = models.CharField(max_length=20, choices=CATEGORY_TYPES, default='other', null=True)
-    name = models.CharField(max_length=6, blank=False)
+    name = models.CharField(max_length=30, blank=False)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='items')
     user = models.ForeignKey(User, on_delete=models.CASCADE)

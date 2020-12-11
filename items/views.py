@@ -30,20 +30,20 @@ def index(request):
 
 def list_pics(request):
     pics = Item.objects.filter(type='pic')
-    paginator = Paginator(pics, 3)
+    paginator = Paginator(pics, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     form = FilterForm()
     if request.method == 'POST':
         category = request.POST.dict()['category']
+        filter_form = FilterForm(initial={'category': category})
         filtered_pics = [x for x in pics.filter(category=category)]
-        paginator = Paginator(filtered_pics, 3)
-        page_obj = paginator.get_page(page_number)
-        form = FilterForm(initial={'category': category})
+        paginator = Paginator(filtered_pics, 6)
+        page_obj_filtered = paginator.get_page(page_number)
         context = {
             'pics': filtered_pics,
-            'page_object': page_obj,
-            'form': form,
+            'page_object': page_obj_filtered,
+            'form': filter_form,
         }
 
         return render(request, 'pic_list.html', context)
@@ -59,16 +59,16 @@ def list_pics(request):
 
 def list_mods(request):
     mods = Item.objects.filter(type='mod')
-    paginator = Paginator(mods, 3)
+    paginator = Paginator(mods, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     form = FilterForm()
     if request.method == 'POST':
         category = request.POST.dict()['category']
-        filtered_mods = [x for x in mods.filter(category=category)]
-        paginator = Paginator(filtered_mods, 3)
-        page_obj = paginator.get_page(page_number)
         form = FilterForm(initial={'category': category})
+        filtered_mods = [x for x in mods.filter(category=category)]
+        paginator = Paginator(filtered_mods, 6)
+        page_obj = paginator.get_page(page_number)
         context = {
             'pics': filtered_mods,
             'page_object': page_obj,

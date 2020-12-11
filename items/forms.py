@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+
 
 from items.models import Item
 
@@ -14,10 +14,7 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ('type', 'category', 'name', 'description', 'image', 'user')
-        # labels = {
-        #     'description': 'Say something about it (optional)',
-        #     'image': '',
-        # }
+
         widgets = {'image': forms.FileInput(
             attrs={'style': 'display: none;', 'class': 'form-control', 'required': False, }
         )}

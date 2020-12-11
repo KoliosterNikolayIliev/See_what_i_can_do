@@ -1,6 +1,7 @@
 {% extends 'site.html' %}
 {% block site_content %}
-    <h1 class="display-4 text-center"> Welcome to Palechko!</h1>
+    <h1 class="display-4 text-center"><i class="fas fa-paint-brush"></i> Welcome to Palechko!<i class="fas fa-cut"></i>
+    </h1>
     <h4 class="text-center"> The home of little artists </h4>
     {% if top_ten %}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -19,15 +20,12 @@
                     <div class="carousel-item {% if forloop.first == 1 %}active{% endif %}" data-interval="10000">
                         <img src="{{ item.image.url }}" class="d-block w-100 h-100 " alt="...">
                         <div class="carousel-caption d-none d-md-block" style="text-align: left;">
-                            <p><a href="{% url 'details' item.id %}" style="color: lime" > Name: {{ item.name }}</a></p>
-                            <p><a href="{% url 'user profile' item.user_id %}" style="color: lime">Creator: {{ item.user.username }}</a></p>
-                            <p style="color: lime">{% if item.type == 'pic' %}Drawing{% else %}Hand made model{% endif %}</p>
-                            <p style="color: lime"><i class="fas fa-thumbs-up fa-2x"
-                                                  aria-hidden="true">{{ item.like_set.count }}</i></p>
+                            <p style="margin-bottom: 50px"><a href="{% url 'details' item.id %}" style="color: blueviolet"><i
+                                    class="fas fa-thumbs-up fa-2x"
+                                    aria-hidden="true">{{ item.like_set.count }}</i></a></p>
                         </div>
                     </div>
                 {% endfor %}
-
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

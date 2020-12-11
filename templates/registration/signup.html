@@ -1,22 +1,42 @@
 {% extends 'site.html' %}
 
 {% block site_content %}
-    <div class="container-fluid" style="background-image: none">
+    <div class="container-fluid" style="padding-top: 9%">
+        
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                <form action="{% url 'signup user' %}" style="border: 1px solid grey;border-radius: 25px; margin: 10% 0%; padding: 10% 5%; background: blueviolet"
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <form class="text-center" action="{% url 'signup user' %}" style="border: 1px solid grey;border-radius: 25px; margin: 10% 0%; padding: 10% 5%; background: blueviolet"
                       method="post">
-                    <h2 style="text-align: center">Register</h2>
+                    <h2 style="text-align: center; color: white">Register</h2>
                     {% csrf_token %}
-                    {{ form }}
+                    <label style="color: white; text-align: left">Username:
+                        {{ form.username }}
+                    </label>
+                    <label style="color: white; text-align: left">First name:
+                        {{ form.first_name }}
+                    </label>
+                    <label style="color: white; text-align: left">Last name:
+                        {{ form.last_name }}
+                    </label>
+                    <label style="color: white; text-align: left">Email:
+                        {{ form.email }}
+                    </label>
+                    <label style="color: white; text-align: left">Password:
+                        {{ form.password1 }}
+                    </label>
+                    <label style="color: white; text-align: left">Confirm password:
+                        {{ form.password2 }}
+                    </label>
+                    <br>
+                    <br>
                     <div>
-                        <button class="btn btn-primary form-control" type="submit">Register</button>
+                        <button class="btn btn-primary text-center" type="submit">Register</button>
                     </div>
-                    <span>Have an account?<a href="{% url 'login' %}" style="color:orange">Login</a></span>
+                    <span style="color: white">Have an account?<a href="{% url 'login' %}" style="color:orange">Login</a></span>
                 </form>
             </div>
-            <div class="col-lg-3"></div>
+            <div class="col-sm"></div>
         </div>
     </div>
 {% endblock site_content %}
