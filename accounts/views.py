@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from accounts.forms import SignUpForm, UserProfileForm, ChangeForm
-from accounts.models import UserProfile
 from items.tools.clean_up import clean_up_files
 
 
@@ -30,65 +29,43 @@ def user_profile(request, pk=None):
 
 def signup_user(request):
     form = SignUpForm()
-    if request.method == 'GET':
-        context = {'form': form}
-
-        return render(request, 'registration/signup.html', context)
-    else:
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-
+    if form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect('index')
     context = {'form': form}
     return render(request, 'registration/signup.html', context)
 
 
 @login_required
 def edit_user(request, pk):
-    user = User.objects.get(pk=pk)
-    if user != request.user:
-        # TODO (404 page)
+    user_edit = User.objects.get(pk=pk)
+    if user_edit != request.user:
         return HttpResponse('FORBIDDEN !')
-    if request.method == 'GET':
-        user = request.user
-        form = ChangeForm(instance=user)
-
-        context = {
-            'form': form,
-            'user': user,
-        }
-
-        return render(request, 'accounts/edit_user.html', context)
-    else:
+    user = request.user
+    form = ChangeForm(instance=user)
+    if request.method == 'POST':
         user = request.user
         form = ChangeForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('user profile', user.pk)
+    context = {
+        'form': form,
+        'user': user,
+    }
 
-        context = {
-            'form': form,
-            'user': user,
-        }
-
-        return render(request, f'accounts/edit_user.html', context)
+    return render(request, 'accounts/edit_user.html', context)
 
 
 @login_required
 def delete_user(request, pk):
     user = User.objects.get(pk=pk)
     if user != request.user:
-        # TODO (404 page)
         return HttpResponse('FORBIDDEN !')
-    if request.method == 'GET':
-        context = {
-            'user': user,
-        }
-
-        return render(request, 'accounts/delete_user.html', context)
-    else:
+    if request.method == 'POST':
         user_image = user.userprofile.profile_picture
         items_images = user.item_set.all()
         if items_images:
@@ -97,6 +74,10 @@ def delete_user(request, pk):
             clean_up_files(user_image.path)
         user.delete()
         return redirect('index')
+    context = {
+        'user': user,
+    }
+    return render(request, 'accounts/delete_user.html', context)
 
 
 @login_required

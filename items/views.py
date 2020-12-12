@@ -1,4 +1,3 @@
-
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -9,7 +8,6 @@ from items.forms import CommentForm, ItemForm, FilterForm
 from items.tools.clean_up import clean_up_files
 
 from items.models import Item, Like, Comment
-
 
 
 def index(request):
@@ -28,8 +26,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-def list_pics(request):
-    pics = Item.objects.filter(type='pic')
+def list_view(pics, request, template):
     paginator = Paginator(pics, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -46,7 +43,7 @@ def list_pics(request):
             'form': filter_form,
         }
 
-        return render(request, 'pic_list.html', context)
+        return render(request, template, context)
 
     context = {
         'pics': pics,
@@ -54,42 +51,23 @@ def list_pics(request):
         'form': form,
     }
 
-    return render(request, 'pic_list.html', context)
+    return render(request, template, context)
+
+
+def list_pics(request):
+    pics = Item.objects.filter(type='pic')
+    return list_view(pics, request, 'pic_list.html')
 
 
 def list_mods(request):
-    mods = Item.objects.filter(type='mod')
-    paginator = Paginator(mods, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    form = FilterForm()
-    if request.method == 'POST':
-        category = request.POST.dict()['category']
-        form = FilterForm(initial={'category': category})
-        filtered_mods = [x for x in mods.filter(category=category)]
-        paginator = Paginator(filtered_mods, 6)
-        page_obj = paginator.get_page(page_number)
-        context = {
-            'pics': filtered_mods,
-            'page_object': page_obj,
-            'form': form,
-        }
-
-        return render(request, 'mod_list.html', context)
-    context = {
-        'mods': mods,
-        'page_object': page_obj,
-        'form': form,
-    }
-
-    return render(request, 'mod_list.html', context)
+    pics = Item.objects.filter(type='mod')
+    return list_view(pics, request, 'mod_list.html')
 
 
 def comment_item(request, pk, item):
     if not request.user.is_authenticated:
         return redirect('login')
     if item.user == request.user:
-        # TODO (404 page)
         return HttpResponse('FORBIDDEN !')
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -131,7 +109,6 @@ def influence_item(request, item, template_name):
         form = ItemForm(instance=item, initial={'user': user})
         form.fields['user'].widget = forms.HiddenInput()
 
-
         context = {
             'form': form,
             'item': item,
@@ -162,7 +139,6 @@ def influence_item(request, item, template_name):
 def edit(request, pk):
     item = Item.objects.get(pk=pk)
     if item.user != request.user:
-        # TODO (404 page)
         return HttpResponse('FORBIDDEN !')
     return influence_item(request, item, 'edit')
 
@@ -177,7 +153,6 @@ def create(request):
 def delete(request, pk):
     item = Item.objects.get(pk=pk)
     if item.user != request.user:
-        # TODO (404 page)
         return HttpResponse('FORBIDDEN !')
     if request.method == 'GET':
         context = {
