@@ -38,8 +38,6 @@ def signup_user(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            profile = UserProfile(user=user, )
-            profile.save()
             login(request, user)
             return redirect('index')
 
