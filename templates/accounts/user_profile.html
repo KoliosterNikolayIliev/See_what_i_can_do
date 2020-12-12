@@ -64,7 +64,7 @@
                      width="140"
                      height="140">
             {% endif %}
-        <h1>{{ profile_user.username }}'s profile!</h1>
+            <h1>{{ profile_user.username }}'s profile!</h1>
         </div>
         <div class="container" style="margin-left: 25%">
 
@@ -85,6 +85,15 @@
             </div>
         </div>
     {% endif %}
+
+    {% if messages %}
+        <div class="messages text-center">
+            {% for message in messages %}
+                <b style="color: green;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</b>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <br>
 
 
@@ -159,7 +168,8 @@
         {% else %}
             <div class="text-center">
                 <h2 style="margin-right: 1%">You have nothing uploaded</h2>
-                <a style="margin-right: 3%" href="{% url 'create' %}" class="btn btn-success">Upload drawing or hand-made model</a>
+                <a style="margin-right: 3%" href="{% url 'create' %}" class="btn btn-success">Upload drawing or
+                    hand-made model</a>
             </div>
         {% endif %}
 
