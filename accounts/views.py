@@ -1,4 +1,4 @@
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import login, update_session_auth_hash, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from accounts.forms import SignUpForm, UserProfileForm, ChangeForm
+from accounts.forms import SignUpForm, UserProfileForm, ChangeForm, LoginForm
 from items.tools.clean_up import clean_up_files
 
 
@@ -95,3 +95,20 @@ def change_password(request):
     return render(request, 'accounts/change_password.html', {
         'form': form
     })
+
+
+def login_user(request):
+    login_form_r = LoginForm()
+    if request.method == 'POST':
+        login_form_p = LoginForm(request.POST)
+        if login_form_p.is_valid():
+            username = login_form_p.cleaned_data['username']
+            password = login_form_p.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('index')
+            messages.error(request, 'Incorrect username or password!')
+
+    context = {'form': login_form_r}
+    return render(request, 'registration/login.html', context)

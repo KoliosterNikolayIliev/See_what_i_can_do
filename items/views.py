@@ -66,7 +66,7 @@ def list_mods(request):
 
 def comment_item(request, pk, item):
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect('login user')
     if item.user == request.user:
         return HttpResponse('FORBIDDEN !')
     form = CommentForm(request.POST)

@@ -4,24 +4,25 @@
         <img src="{{ item.image.url }}" alt="No image !" style="width: 60rem;height: 40rem">
     </div>
     <div class="container" style="margin-left: 37%">
-    {% if can_delete and can_edit %}
-        <div>
-            <a href="{% url 'edit' item.pk %}" class="btn btn-success " style="width: 90px">Edit</a>
-            <a href="{% url 'delete' item.pk %}" class="btn btn-danger" style="width: 90px">Delete</a>
-        </div>
-        <br>
-    {% else %}
-        {% if has_liked %}
-            <a style="color: orange" href="{% url 'like' item.id %}"><i class="fas fa-thumbs-up fa-7x"
-                                                  aria-hidden="true">{{ item.like_set.count }}</i></a>
+        {% if can_delete and can_edit %}
+            <div>
+                <a href="{% url 'edit' item.pk %}" class="btn btn-success " style="width: 90px">Edit</a>
+                <a href="{% url 'delete' item.pk %}" class="btn btn-danger" style="width: 90px">Delete</a>
+            </div>
+            <br>
         {% else %}
-            <a style="color: orange" href="{% url 'like' item.id %}"><i class="far fa-thumbs-up fa-7x"
-                                                  aria-hidden="true">{{ item.like_set.count }}</i></a>
+            {% if has_liked %}
+                <a style="color: orange" href="{% url 'like' item.id %}"><i class="fas fa-thumbs-up fa-7x"
+                                                                            aria-hidden="true">{{ item.like_set.count }}</i></a>
+            {% else %}
+                <a style="color: orange" href="{% url 'like' item.id %}"><i class="far fa-thumbs-up fa-7x"
+                                                                            aria-hidden="true">{{ item.like_set.count }}</i></a>
+            {% endif %}
         {% endif %}
-    {% endif %}
     </div>
-    <div class="container" style="background-color: blueviolet;color: white; padding:2%; border: 1px solid grey;border-radius: 25px; margin-top: 2%">
-    <div class="row">
+    <div class="container"
+         style="background-color: blueviolet;color: white; padding:2%; border: 1px solid grey;border-radius: 25px; margin-top: 2%">
+        <div class="row">
             <div class="col-sm">
                 <h5><u>Category:</u> {{ item.category }}</h5>
             </div>
@@ -30,7 +31,8 @@
             </div>
             <div class="col-sm"><i class="far fa-thumbs-up fa-2x" aria-hidden="true">{{ item.like_set.count }}</i></div>
             <div class="col-sm">
-                <h5><u>Creator:</u> <a style="color: white" href="{% url 'user profile' item.user_id %}">{{ item.user.username }}</a></h5>
+                <h5><u>Creator:</u> <a style="color: white"
+                                       href="{% url 'user profile' item.user_id %}">{{ item.user.username }}</a></h5>
             </div>
             <div class="col-sm">
                 <h5><u>Date created:</u> {{ item.date_created|date:"D, d, M, Y" }}</h5>

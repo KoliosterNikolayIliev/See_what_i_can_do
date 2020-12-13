@@ -1,10 +1,11 @@
 from django.conf.urls import url
 from django.urls import path, include
 
-from accounts.views import user_profile, signup_user, delete_user, edit_user, change_password
+from accounts.views import user_profile, signup_user, delete_user, edit_user, change_password, login_user
 
 urlpatterns = [
 
+    path('login/', login_user, name='login user'),
     path('', include('django.contrib.auth.urls')),
     path('profile/<int:pk>/', user_profile, name='user profile'),
     path('profile/', user_profile, name='current user profile'),
